@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8">
-        <title>Assignment 6 &laquo; Data Visualization Dashboard&raquo;</title>
+        <title>Assignment 6 &laquo; Video Games Data Visualization Dashboard&raquo;</title>
         <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
         <link rel="stylesheet" href="main.css"/>
         <!--Feel free to add more CSS files as needed-->
@@ -10,25 +10,38 @@
     </head>
 <body  style="background-color: #D291BC;">
     <div class="header" >
-        <h3>Assignment 6 &laquo; Data Visualization Dashboard &raquo;</h3>
+        <h3>Assignment 6 &laquo; Video Games Data Visualization Dashboard &raquo;</h3>
     </div>
     <!--  We included a basic HTML structure for the 3 graphs here. Feel free to change this if you'd like  -->
     <div class="row">
+
+                <div class="col-lg-6"> 
+            <div id="graph1" style="background-color: #FEC8D8;">
+            </div>
+              <form style="text-align:center; background-color: #FEC8D8;"> 
+                    <input type="range" name="amountRange" min="1980" max="2020" value="2000" class="slider" oninput="this.form.amountInput.value=this.value;setData(value);" />
+                    *Use the slider to choose a year: <input type="number" name="amountInput" min="1980" max="2020" value="" oninput="this.form.amountRange.value=this.value;setData(value);" />
+                </form>
+        </div>
         <div class="col-lg-6">
-            <div id="graph1" style="background-color: #FEC8D8;"></div>
-            <div id="graph2" style="background-color: #FFDFD3;"></div><br/>
+            <div id="graph2" style="background-color: #FFDFD3;"></div>
         </div>
         <div class="col-lg-6">
             <div id="graph3"  style="background-color: #E0BBE4;"></div>
+            
         </div>
-    </div>
+
+
+
         <div class="col-lg-6">
             <h1> Written Questions</h1>
             <h3>Question 1: How my dashboard answers questions</h3>
                 <p>I chose the Video Games dataset and presented my data using 3 graphs. I used the d3.schemePastel1 and d3.schemePastel2 as my color schemes to be visually pleasing and consistent throughout the data visualization.
-                <p>My dashboard contains three graphs. The first graph is a bar graph titled "Top 10 Video Games of All Time" and it answers the question of what are top 10 video games of all time. This graph sorts the Global_Sales for each video game and returns top 10 games. I made the bar graphs's bar rectangles filled with colors from the  d3.schemePastel1 palette and  their widths based on the number of sales in millions. I made the y-axis rotated sideways so that it is easier to distinguish from video game titles.
+                <p>My dashboard contains three graphs. The first graph is an interactive bar graph with a slider titled "Top 10 Video Games of All Time" and it answers the question of what are top 10 video games of all time. This graph sorts the Global_Sales for each video game and returns top 10 games. Users can use the slider to choose a specific year and view the top 10 games for that year. The graph title and data are updated accordingly.
+                    I made the bar graphs's bar rectangles filled with colors from the  d3.schemePastel1 palette and  their widths based on the number of sales in millions. I made the y-axis rotated sideways so that it is easier to distinguish from video game titles.
                 I made sure to indicate that Sales numbers are given "in millions" in my x-axis to make the numbers more intuitive. The floating sales numbers are labeled next to each bar and reduced to two significant digits for consistency.
-                <p> My second graph titled "Most Popular Video Game Genres per Region" answers the question of which genre is most popular in each region. The circular node graph represents each region by a color and each node has its radius scaled to the sales of that specific game genre in that region. In order to get the data, I first grouped the video game sales per region and found the total sales per region using .nest() .rollup() and .sum() functions. In order to make the graph easier to read, I added a legend made out of texts and circles showing what region each color corresponds to. In order to make the graph interactive, I added a tooltip and dragging simulation for circle nodes after reading the d3-force documentation on github (https://github.com/d3/d3-force ). I used forceSimulation() to apply the simulation transformations on each node.
+        
+                <p> My second graph titled "Most Popular Video Game Genres per Region" answers the question of which genre is most popular in each region. The circular node graph represents each region by a color and each node has its radius scaled to the sales of that specific game genre in that region. In order to get the data, I first grouped the video game sales per region and found the total sales per region using .nest() .rollup() and .sum() functions. In order to make the graph easier to read, I added a legend made out of texts and circles showing what region each color corresponds to. In order to make the graph interactive, I added a tooltip and dragging simulation for circle nodes after reading  <a href="https://github.com/d3/d3-force">the d3-force documentation on Github</a>. I used forceSimulation() to apply the simulation transformations on each node.
                 In addition, I created a tooltip that prints out the sales for that region in millions, so that the visual information is double coded. I enjoyed making this graph as it visualizes regions by colors and makes the size comparison intuitive through the use of circular nodes.
                 <p> My third graph is titled Top Publisher per Video Game Genre and it answers the question of  which publisher to pick based on which genre a game is. This bar graph represents the Sales in millions on its x-axis and lists the video game genres on its y-axis. I added the top publisher's name on the bar rectangles and also sorted the genres by the number of total Global_Sales, so that the top listed genre is the most popular one with most sales and each are matched with the top publisher of the genre.
                 </p>
@@ -57,6 +70,7 @@
             <h3>Question 5: Reflection on the accessibility of my data viz</h3>
                 <p>I could have made my design more accessible by adding color contrast filters for colorblind users, however the D3 library does not easily allow that. I would also like to have added a voice-over option, which would be beyond my scope of this project and take longer time. I should have done research on JS libraries available for accessibility options. </p>
         </div>
+            </div>
     <!--Feel free to add more JavaScript files as needed-->
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="topgames.js"></script>

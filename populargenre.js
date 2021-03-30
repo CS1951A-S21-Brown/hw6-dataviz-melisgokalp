@@ -2,17 +2,22 @@
 // Most Popular Genres per Region
 let svg1 = d3.select("#graph2")
     .append("svg")
-    .attr("width", graph_2_width+margin.left)
-    .attr("height", graph_2_height+ margin.top*2)
+    .attr("width", graph_2_width + margin.left)
+    .attr("height", graph_2_height + margin.top*3-10)
     .append("g")
-    .attr("transform", `translate(${(margin.left/2) + margin.left/2 + 20},${margin.top+10})`);
+    .attr("transform", `translate(${(margin.left/2) },${margin.top+10})`);
 
 let title_2 = svg1.append("text")
-    .attr("transform", `translate(${(graph_2_width/2- margin.left)}, ${-20})`)  
+    .attr("transform", `translate(${(graph_2_width/2)}, ${-20})`)  
     .style("text-anchor", "middle")
     .style("font-size", 20)
     .style("font-family", "Helvetica")  
     .text("Most Popular Video Game Genres per Region");
+
+let subtitle = svg1.append("text")
+    .attr("transform", `translate(${(graph_2_width/2)}, ${10})`)  
+    .style("text-anchor", "middle")
+    .text("*You can drag and hover over the circles");
 
 d3.csv(filename).then(function(data) {
     regions = ["NA_Sales", "EU_Sales", "JP_Sales", "Other_Sales"];
@@ -51,8 +56,8 @@ d3.csv(filename).then(function(data) {
     var mousemove = function(d) {
         Tooltip
         .html('<u>' + d.key.slice(0, -1) + ' Game Sales '+ '</u>' + '<br> ' + d.region +': '  + d.value.toFixed(1) + 'm')
-        .style("left", `${(d3.event.pageX) - size(Math.round(d.value))}px`)
-        .style("top", `${(d3.event.pageY) - 130}px`)
+        .style("left", `${(d.x)}px`)
+        .style("top", `${(d.y)}px`)
     }
     var mouseleave = function(d) {
         Tooltip
@@ -61,8 +66,13 @@ d3.csv(filename).then(function(data) {
 
     var size = d3.scaleLinear()
         .domain([0,d3.max(data,function(d){return parseFloat(d.value);})])
-        .range([7,50])
-
+        .range([10,55])
+  //  Add legend for each region
+  svg1.append("text").attr("x",-10  ).attr("y", graph_2_height/2 -30).attr("font-weight", "bold").text("Regions:").style("font-size", "15px").attr("alignment-baseline","middle");
+    for (i = 0; i < regions.length; i++) {
+        svg1.append("circle").attr("cx",-10).attr("cy",graph_2_height/2 + i*30).attr("r", 6).style("fill", color(regions_name[i]));
+        svg1.append("text").attr("x",0  ).attr("y", graph_2_height/2 + i*30).text(regions_name[i]).style("font-size", "15px").attr("alignment-baseline","middle");
+    }
     var node = svg1.append("g")
         .selectAll("circle")
         .data(data)
@@ -92,23 +102,23 @@ d3.csv(filename).then(function(data) {
         .style("text-anchor", "middle")
         .style("font-family", "Helvetica")
         .style("font-size", function(d){ return size(d.value)*3.8/d.key.length});
-    let k = graph_2_width/2-(margin.left*2);
+    let k = graph_2_width/2-(margin.left);
     var x = d3.scaleOrdinal()
     .domain(function (d) { return d.region; })
     .range([0, k*0.25, k*0.5,k]);
     svg1.append("text")
-        .attr("transform", `translate(${(graph_2_width - margin.left *2 ) / 2}, ${(graph_2_height) + margin.bottom/2 })`)    
+        .attr("transform", `translate(${(graph_2_width ) / 2}, ${(graph_2_height) +margin.bottom/2 })`)    
         .style("text-anchor", "middle")
         .text("Sales (in millions)");
     var y = d3.scaleOrdinal()
     .domain(function (d) { return d.value; })
-    .range([ graph_2_height/2-margin.top, graph_2_height/2-margin.top/2 ]);
+    .range([ graph_2_height/2, graph_2_height/2 + 30]);
  
     var simulation = d3.forceSimulation()
-        .force("x", d3.forceX().strength(0.4).x( function(d){ return x(d.region) } ))
-        .force("y", d3.forceY().strength(0.8).y( function(d){ return y(d.region)+60 } ))
-        .force("center", d3.forceCenter().x(graph_2_width/2-margin.left-10).y(graph_2_height/2-margin.top/2))
-        .force("collide", d3.forceCollide().strength(.5).radius(function(d){ return (size(d.value)+3) }).iterations(1));
+        .force("x", d3.forceX().strength(0.8).x( function(d){ return x(d.region) } ))
+        .force("y", d3.forceY().strength(0.8).y( function(d){ return y(d.region) } ))
+        .force("center", d3.forceCenter().x(graph_2_width/2).y(graph_2_height/2-margin.top/2 + 30))
+        .force("collide", d3.forceCollide().strength(.9).radius(function(d){ return (size(d.value) +2) }).iterations(1));
     simulation
         .nodes(data)
         .on("tick", function(d){
@@ -120,14 +130,7 @@ d3.csv(filename).then(function(data) {
                 .attr("y", function (d) {return d.y +3; });
 
         });
-    
-
-    
-    //  Add legend for each region
-    for (i = 0; i < regions.length; i++) {
-        svg1.append("circle").attr("cx",graph_2_width/2 + 50).attr("cy",130 + i*30).attr("r", 6).style("fill", color(regions_name[i]));
-        svg1.append("text").attr("x", graph_2_width/2 + 60  ).attr("y", 130 + i*30).text(regions_name[i]).style("font-size", "15px").attr("alignment-baseline","middle");
-    }
+     
     function dragstart(d) {
         if (!d3.event.active) simulation.alphaTarget(.04).restart();
         d.fx = d.x;

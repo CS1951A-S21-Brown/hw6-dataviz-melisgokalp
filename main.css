@@ -14,10 +14,40 @@ h2,
 p {
     margin: 10px;
     text-indent: 50px;
-    /* padding: 5px; */
 }
 
-br { 
-    text-indent: 50px; 
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 10px;
+    background: #ae70d1;
+    outline: black;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
 }
-/* Include any custom CSS styling here! */
+
+
+.slider:hover {
+    opacity: 1;
+}
+form {
+      padding-bottom: 10px;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgb(27, 34, 95);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
