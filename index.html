@@ -22,6 +22,41 @@
             <div id="graph3"  style="background-color: #E0BBE4;"></div>
         </div>
     </div>
+        <div class="col-lg-6">
+            <h1> Written Questions</h1>
+            <h3>Question 1: How my dashboard answers questions</h3>
+                <p>I chose the Video Games dataset and presented my data using 3 graphs. I used the d3.schemePastel1 and d3.schemePastel2 as my color schemes to be visually pleasing and consistent throughout the data visualization.
+                <p>My dashboard contains three graphs. The first graph is a bar graph titled "Top 10 Video Games of All Time" and it answers the question of what are top 10 video games of all time. This graph sorts the Global_Sales for each video game and returns top 10 games. I made the bar graphs's bar rectangles filled with colors from the  d3.schemePastel1 palette and  their widths based on the number of sales in millions. I made the y-axis rotated sideways so that it is easier to distinguish from video game titles.
+                I made sure to indicate that Sales numbers are given "in millions" in my x-axis to make the numbers more intuitive. The floating sales numbers are labeled next to each bar and reduced to two significant digits for consistency.
+                <p> My second graph titled "Most Popular Video Game Genres per Region" answers the question of which genre is most popular in each region. The circular node graph represents each region by a color and each node has its radius scaled to the sales of that specific game genre in that region. In order to get the data, I first grouped the video game sales per region and found the total sales per region using .nest() .rollup() and .sum() functions. In order to make the graph easier to read, I added a legend made out of texts and circles showing what region each color corresponds to. In order to make the graph interactive, I added a tooltip and dragging simulation for circle nodes after reading the d3-force documentation on github (https://github.com/d3/d3-force ). I used forceSimulation() to apply the simulation transformations on each node.
+                In addition, I created a tooltip that prints out the sales for that region in millions, so that the visual information is double coded. I enjoyed making this graph as it visualizes regions by colors and makes the size comparison intuitive through the use of circular nodes.
+                <p> My third graph is titled Top Publisher per Video Game Genre and it answers the question of  which publisher to pick based on which genre a game is. This bar graph represents the Sales in millions on its x-axis and lists the video game genres on its y-axis. I added the top publisher's name on the bar rectangles and also sorted the genres by the number of total Global_Sales, so that the top listed genre is the most popular one with most sales and each are matched with the top publisher of the genre.
+                </p>
+
+        <h3>Question 2: Reasons why D3 was helpful and improved my data viz </h3>
+            <ol>
+                <li>D3 helped me manipulate and visualize data without having to deal with HTML, SVG and CSS code. I used D3 to read data from a csv file and insert individual data points to a graph. Starting from a file to a graph was very simple and I did not have to handle any graphics. Colors, filling and adding text was very simple.
+                </li>
+                <li>It was very easy to create axes for graphs and scale the data. I did not have to calculate the margins and relative positions of graph components. By setting the heigh and weight for each component, it becomes very easy to place new items and determine their relative x and y positions.
+                </li>
+                <li>D3 was helpful in making animations and creating tooltips to make the data interactive. I could easily make a text box appear with individual datapoints and adjust the data. D3 handles 
+                </li>
+            </ol>
+
+       <h3>Question 3: Reasons why D3 was <b>not</b> the best tool for data viz </h3>
+            <ol>
+                <li>D3 is not supported in older browsers, therefore it may not be accessible to all users. Furthermore, D3 does not support android apps and requires wrappers, which makes it not ideal.</li>
+                <li>It has data-source limitations. I was not able to use a JS dictionary as the data source and it made my project harder than it should be. </li>
+                <li>It makes the data available and manipulatable, therefore it is not the best tool for privacy concerns and visualizing sensitive data.</li>
+            </ol>
+            <h3>Question 4: Accessible Data Visualization</h3>
+                <p>	I have made the effort to make my data easy to read and made colors optional in order to interpret the data. All data points are annotated with text and even if one cannot distinguish colors, they can still read the data and extract all the information. I also added axis labels for all graphs and added that the sales are represented "in millions". I also added a color legend for my second graph, so that users can map the regions to colors while having the option to hover over data points and read individual pieces of information.
+		        <p>I used dark text against light backgrounds for color contrast and added padding between data points to make it easily readable.
+                D3 does not support older browsers, therefore it will not be accessible to users with older technology. I would use another tool for visualizing data to make it more accessible.
+                In order to make my data accessible to visually impaired users I could implement text-to speech and descriptions of the data that can be read out loud for disabled users. </p>
+            <h3>Question 5: Reflection on the accessibility of my data viz</h3>
+                <p>I could have made my design more accessible by adding color contrast filters for colorblind users, however the D3 library does not easily allow that. I would also like to have added a voice-over option, which would be beyond my scope of this project and take longer time. I should have done research on JS libraries available for accessibility options. </p>
+        </div>
     <!--Feel free to add more JavaScript files as needed-->
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="topgames.js"></script>

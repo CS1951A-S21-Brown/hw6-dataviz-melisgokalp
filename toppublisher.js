@@ -5,10 +5,10 @@ let svg3 = d3.select("#graph3")
     .attr("width", graph_3_width+margin.left*2 )
     .attr("height",graph_3_height+ margin.top*2)
     .append("g")
-    .attr("transform", `translate(${(margin.left/2) },${margin.top+10})`);
+    .attr("transform", `translate(${(margin.left/2+5) },${margin.top+10})`);
 
 let title_3 = svg3.append("text")
-    .attr("transform", `translate(${(graph_3_width/2 -margin.left)}, ${-20})`)  
+    .attr("transform", `translate(${(graph_3_width/2 -margin.left/2)}, ${-20})`)  
     .style("text-anchor", "middle")
     .style("font-size", 20)
     .style("font-family", "Helvetica")  
@@ -76,4 +76,8 @@ d3.csv(filename).then(function(data) {
         .attr("transform", `translate(${(graph_3_width/2 -margin.left/2)}, ${(graph_3_height + 35) })`)    
         .style("text-anchor", "middle")
         .text("Sales (in millions)");
+    svg3.append("text")
+        .attr("transform", `translate(${(-margin.left/4-12)}, ${graph_3_height/2}) rotate(-90)`)  
+        .style("text-anchor", "middle")
+        .text("Genre");
 });

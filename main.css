@@ -4,9 +4,20 @@
 }
 
 .header > h3, h5 {
-    margin: 0;
     padding-top: 20px;
+    text-indent: 50px;
+
     text-align: center;
 }
 
+h2,
+p {
+    margin: 10px;
+    text-indent: 50px;
+    /* padding: 5px; */
+}
+
+br { 
+    text-indent: 50px; 
+}
 /* Include any custom CSS styling here! */

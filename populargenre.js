@@ -5,10 +5,10 @@ let svg1 = d3.select("#graph2")
     .attr("width", graph_2_width+margin.left)
     .attr("height", graph_2_height+ margin.top*2)
     .append("g")
-    .attr("transform", `translate(${(margin.left/2) },${margin.top+10})`);
+    .attr("transform", `translate(${(margin.left/2) + margin.left/2 + 20},${margin.top+10})`);
 
 let title_2 = svg1.append("text")
-    .attr("transform", `translate(${(graph_2_width/2- margin.left)}, ${-25})`)  
+    .attr("transform", `translate(${(graph_2_width/2- margin.left)}, ${-20})`)  
     .style("text-anchor", "middle")
     .style("font-size", 20)
     .style("font-family", "Helvetica")  
@@ -108,7 +108,7 @@ d3.csv(filename).then(function(data) {
         .force("x", d3.forceX().strength(0.4).x( function(d){ return x(d.region) } ))
         .force("y", d3.forceY().strength(0.8).y( function(d){ return y(d.region)+60 } ))
         .force("center", d3.forceCenter().x(graph_2_width/2-margin.left-10).y(graph_2_height/2-margin.top/2))
-        .force("collide", d3.forceCollide().strength(.5).radius(function(d){ return (size(d.value)+3) }).iterations(1)); 
+        .force("collide", d3.forceCollide().strength(.5).radius(function(d){ return (size(d.value)+3) }).iterations(1));
     simulation
         .nodes(data)
         .on("tick", function(d){
@@ -120,6 +120,7 @@ d3.csv(filename).then(function(data) {
                 .attr("y", function (d) {return d.y +3; });
 
         });
+    
 
     
     //  Add legend for each region

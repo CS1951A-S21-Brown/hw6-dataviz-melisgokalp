@@ -6,12 +6,12 @@ let svg = d3.select("#graph1")
     .attr("width", graph_1_width +margin.left)
     .attr("height", graph_1_height+ margin.top*2)
     .append("g")
-    .attr("transform", `translate(${margin.left/2},${margin.top})`);
+    .attr("transform", `translate(${margin.left/2 + margin.left/2 + 20},${margin.top})`);
 let countRef = svg.append("g");
 let y_axis_label = svg.append("g");
 
 let title = svg.append("text")
-    .attr("transform", `translate(${(graph_1_width/2- margin.left)}, ${-20})`)  
+    .attr("transform", `translate(${(graph_1_width/2- margin.left)}, ${-20})`)
     .style("text-anchor", "middle")
     .style("font-size", 20)
     .style("font-family", "Helvetica") 
@@ -19,7 +19,7 @@ let title = svg.append("text")
 
 
 let y_axis_text = svg.append("text")
-    .attr("transform", `translate(${(- graph_1_width /6)}, ${graph_1_height})`)        
+    .attr("transform", `translate(${(- graph_1_width /6)}, ${graph_1_height})`)
     .style("text-anchor", "middle");
 
 d3.csv(filename).then(function(data) {
